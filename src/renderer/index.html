@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src https://api.openai.com;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Posture Pal</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Posture Pal</h1>
+
+        <div id="apiKeyNotice" class="notice warning hidden">
+            ⚠️ OpenAI API Key is missing or invalid. Please check your <code>.env</code> file. Posture checks are disabled.
+        </div>
+
+        <div class="webcam-container">
+            <video id="webcamFeed" autoplay muted playsinline></video>
+            <canvas id="captureCanvas" style="display: none;"></canvas>
+        </div>
+
+        <div id="status" class="status-message">Initializing...</div>
+
+        <div id="feedback" class="feedback-container hidden">
+            <p id="postureResult"></p>
+            <p id="breathingInstruction"></p>
+        </div>
+
+        <div class="controls">
+             <p class="interval-info">Checking posture every <span id="checkIntervalSeconds">30</span> seconds.</p>
+        </div>
+    </div>
+
+    <script defer src="renderer.js"></script>
+</body>
+</html>
