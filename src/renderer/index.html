@@ -2,36 +2,35 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src https://api.openai.com;">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>Posture Pal</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Posture Pal</h1>
 
-        <div id="apiKeyNotice" class="notice warning hidden">
-            ⚠️ OpenAI API Key is missing or invalid. Please check your <code>.env</code> file. Posture checks are disabled.
+    <div class="main-container">
+
+        <div class="app-content">
+            <h1>Posture Pal</h1>
+            <div class="webcam-container">
+                <video id="webcamFeed" autoplay playsinline></video>
+                <canvas id="captureCanvas" style="display: none;"></canvas> </div>
+            <div id="status">Initializing...</div>
+            <div id="feedback" class="hidden">
+                <p id="postureResult"></p>
+                <p id="breathingInstruction"></p>
+            </div>
+            <div id="checkIntervalInfo">Checking posture every <span id="checkIntervalSeconds">?</span> seconds.</div>
+            <div id="apiKeyNotice" class="hidden error-notice"></div>
         </div>
 
-        <div class="webcam-container">
-            <video id="webcamFeed" autoplay muted playsinline></video>
-            <canvas id="captureCanvas" style="display: none;"></canvas>
+        <div id="todoListContainer" class="todo-container">
+            <h2>My Tasks</h2>
+            <div id="todoListItems" class="todo-items-list">
+                </div>
+            <input type="text" id="todoInput" placeholder="Add a new task and press Enter">
         </div>
 
-        <div id="status" class="status-message">Initializing...</div>
-
-        <div id="feedback" class="feedback-container hidden">
-            <p id="postureResult"></p>
-            <p id="breathingInstruction"></p>
-        </div>
-
-        <div class="controls">
-             <p class="interval-info">Checking posture every <span id="checkIntervalSeconds">30</span> seconds.</p>
-        </div>
-    </div>
-
-    <script defer src="renderer.js"></script>
+    </div><script src="renderer.js"></script>
 </body>
 </html>
